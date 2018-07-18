@@ -39,6 +39,11 @@ class Venue
      */
     private $url;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function getId()
     {
         return $this->id;

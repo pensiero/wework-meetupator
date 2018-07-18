@@ -34,22 +34,22 @@ class VenueProvider
      * Get all the Work Buildings through the WeWork API
      * TODO
      */
-    public function findVenues()
+    public function findAvailableVenues()
     {
     }
 
     /**
-     * Get all the venues registered in the database
+     * Get all the venues registered in the database and associated to a Meetup
      *
      * @return mixed
      */
-    public function getAllVenues()
+    public function getAssociatedVenues()
     {
         return $this
             ->em
             ->createQueryBuilder()
             ->select('n')
-            ->from('App:Venue')
+            ->from('App:Venue', 'n')
             ->orderBy('n.name', 'asc')
             ->getQuery()
             ->getResult();
