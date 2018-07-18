@@ -1,6 +1,8 @@
 WeWork Meetupator
 ====================
 
+> This is an hack built during the Meetup x WeWork Hackaton 2018
+
 The WeWork Members Network offers a powerful way of creating events that will take place in each WeWork building...
 and guess what? At Meetup we create events!
 
