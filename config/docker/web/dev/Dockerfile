@@ -10,6 +10,7 @@ ENV PROJECT_PATH=/usr/share/nginx
 RUN apt update -q && apt upgrade -yqq && apt install -yqq \
     git \
     libssl-dev \
+    yarn \
     zip \
     zlib1g-dev libicu-dev g++ && \
     docker-php-ext-install -j$(nproc) \
