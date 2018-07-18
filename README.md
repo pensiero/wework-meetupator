@@ -19,7 +19,11 @@ WeWork Meetupator™ is built on top of the following technologies:
 - [Twig](https://twig.symfony.com/) (as template engine)
 - Coffee (a lot!)
 
+![](https://raw.githubusercontent.com/pensiero/wework-meetupator/master/assets/images/futurama-coffee.gif)
+
 # Setup
+
+![](https://raw.githubusercontent.com/pensiero/wework-meetupator/master/assets/images/dont-panic.jpg)
 
 First time simply run:
 
