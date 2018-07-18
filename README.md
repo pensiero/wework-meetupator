@@ -23,8 +23,6 @@ WeWork Meetupator™ is built on top of the following technologies:
 
 # Setup
 
-![](https://raw.githubusercontent.com/pensiero/wework-meetupator/master/assets/images/dont-panic.jpg)
-
 First time simply run:
 
 ```bash
@@ -46,3 +44,5 @@ Add the following lines in your `/etc/hosts` file.
 ```
 127.0.0.1 www.meetupator.dev
 ```
+
+![](https://raw.githubusercontent.com/pensiero/wework-meetupator/master/assets/images/dont-panic.jpg)
