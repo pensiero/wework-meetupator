@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}WeWork Meetupator{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet" />
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <script src="{{ asset('build/js/app.js') }}"></script>
     </body>
 </html>

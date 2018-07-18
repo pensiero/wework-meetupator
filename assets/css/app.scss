@@ -1,0 +1,28 @@
+@import "~normalize.css";
+@import "variables";
+@import "fonts";
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $whiteColor;
+  font: 18px/1.5 $mainFont;
+  color: $darkColor;
+}
+
+h1, h2, h3 {
+  margin: 0 0 .5em;
+}
+
+p {
+  margin: 0.5em 0 0.5em;
+}
+
+a {
+  color: #000000;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+}
