@@ -18,13 +18,21 @@ class Venue
 
     /**
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $sourceId;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Meetup", inversedBy="venue", cascade={"persist", "remove"})
+     * @var Meetup
+     */
+    private $meetup;
 
     public function getId()
     {
@@ -51,6 +59,18 @@ class Venue
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getMeetup(): ?Meetup
+    {
+        return $this->meetup;
+    }
+
+    public function setMeetup(?Meetup $meetup): self
+    {
+        $this->meetup = $meetup;
 
         return $this;
     }

@@ -18,13 +18,21 @@ class Meetup
 
     /**
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $sourceId;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Venue", mappedBy="meetup", cascade={"persist", "remove"})
+     * @var Venue
+     */
+    private $venue;
 
     public function getId()
     {
@@ -51,6 +59,24 @@ class Meetup
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getVenue(): ?Venue
+    {
+        return $this->venue;
+    }
+
+    public function setVenue(?Venue $venue): self
+    {
+        $this->venue = $venue;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMeetup = $venue === null ? null : $this;
+        if ($newMeetup !== $venue->getMeetup()) {
+            $venue->setMeetup($newMeetup);
+        }
 
         return $this;
     }
