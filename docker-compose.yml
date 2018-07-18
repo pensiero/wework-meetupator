@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7.22
+    volumes:
+      - mysql-data:/var/lib/mysql
+    expose:
+      - 3306
+
+  web:
+    build:
+      context: .
+      dockerfile: config/docker/web/prod/Dockerfile
+    depends_on:
+      - mysql
+
+  nginx:
+    build:
+      context: ./config/docker/nginx/
+    depends_on:
+      - web
+
+volumes:
+  mysql-data:
