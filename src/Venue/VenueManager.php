@@ -6,7 +6,7 @@ use App\Entity\Meetup;
 use App\Entity\Venue;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MeetupManager
+class VenueManager
 {
     /**
      * @var EntityManagerInterface

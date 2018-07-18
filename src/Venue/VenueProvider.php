@@ -4,7 +4,7 @@ namespace App\Venue;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class MeetupProvider
+class VenueProvider
 {
     /**
      * @var EntityManagerInterface

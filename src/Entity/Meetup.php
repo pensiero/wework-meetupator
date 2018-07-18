@@ -34,6 +34,11 @@ class Meetup
      */
     private $venue;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
+
     public function getId()
     {
         return $this->id;
@@ -77,6 +82,18 @@ class Meetup
         if ($newMeetup !== $venue->getMeetup()) {
             $venue->setMeetup($newMeetup);
         }
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
