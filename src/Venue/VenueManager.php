@@ -26,15 +26,17 @@ class VenueManager
      *
      * @param string $sourceId
      * @param string $name
+     * @param string $url
      * @param Meetup $meetup
      *
      * @return Venue
      */
-    public function createVenue($sourceId, $name, Meetup $meetup): Venue
+    public function createVenue($sourceId, $name, $url, Meetup $meetup): Venue
     {
         $venue = new Venue();
         $venue->setSourceId($sourceId);
         $venue->setName($name);
+        $venue->setUrl($url);
         $venue->setMeetup($meetup);
 
         $this->em->persist($venue);

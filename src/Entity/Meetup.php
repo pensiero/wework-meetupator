@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Meetup
 {
+    // base url used for url generation
+    const BASE_URL = 'https://www.meetup.com/';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,6 +45,11 @@ class Meetup
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function echoUrl()
+    {
+        return self::BASE_URL . $this->getUrl();
     }
 
     public function getId()

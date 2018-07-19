@@ -28,11 +28,12 @@ class MeetupManager
      *
      * @return Meetup
      */
-    public function createMeetup($sourceId, $name): Meetup
+    public function createMeetup($sourceId, $name, $url): Meetup
     {
         $meetup = new Meetup();
         $meetup->setSourceId($sourceId);
         $meetup->setName($name);
+        $meetup->setUrl($url);
 
         $this->em->persist($meetup);
         $this->em->flush();

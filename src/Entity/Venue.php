@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Venue
 {
+    // base url used for url generation
+    const BASE_URL = 'https://www.wework.com';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -17,8 +20,8 @@ class Venue
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $sourceId;
 
@@ -44,17 +47,22 @@ class Venue
         return $this->name;
     }
 
+    public function echoUrl()
+    {
+        return self::BASE_URL . $this->getUrl();
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function getSourceId(): ?int
+    public function getSourceId(): ?string
     {
         return $this->sourceId;
     }
 
-    public function setSourceId(int $sourceId): self
+    public function setSourceId(string $sourceId): self
     {
         $this->sourceId = $sourceId;
 

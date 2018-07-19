@@ -9,18 +9,18 @@
             <form method="post" action="{{ url('home') }}">
                 <div class="form-group">
                     <label for="venueInput">Building</label>
-                    <select class="form-control" id="venueInput">
+                    <select class="form-control" id="venueInput" name="venue_id">
                         {% for venue in availableVenues %}
-                            <option value="{{ venue.sourceId }}">{{ venue.name }}</option>
+                            <option value="{{ venue.id }}">{{ venue.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="meetupInput">Meetup URL</label>
-                    <input type="text" class="form-control" id="meetupInput" placeholder="https://www.meetup.com/..." />
+                    <input type="text" class="form-control" id="meetupInput" name="meetup_url" placeholder="https://www.meetup.com/..." required />
                 </div>
                 <div class="form-group">
-                    <button type="submit">Associate</button>
+                    <button type="submit" class="btn btn-primary">Associate</button>
                 </div>
             </form>
         </section>
@@ -31,9 +31,9 @@
         <section>
             <h2>Buildings linked to Meetup</h2>
             <ul>
-                {% for veue in associatedVenues %}
+                {% for venue in associatedVenues %}
                     <li>
-                        <a href="{{ venue.url }}" target="_blank">{{ venue }}</a> --> <a href="{{ venue.meetup.url }}" target="_blank">{{ venue.meetup }}</a>
+                        <a href="{{ venue.echoUrl() }}" target="_blank">{{ venue }}</a> --> <a href="{{ venue.meetup.echoUrl() }}" target="_blank">{{ venue.meetup }}</a>
                     </li>
                 {% endfor %}
             </ul>
