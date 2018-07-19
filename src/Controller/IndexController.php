@@ -51,6 +51,23 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
+        $availableVenues = $this->venueProvider->findAvailableVenues();
+        $associatedVenues = $this->venueProvider->getAssociatedVenues();
+
+        return $this->render('index/index.html.twig', [
+            'availableVenues'  => $availableVenues,
+            'associatedVenues' => $associatedVenues,
+        ]);
+    }
+
+    /**
+     * @Route("/connect", name="connect")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function connect(Request $request)
+    {
         if ($request->isMethod('POST')) {
 
             $venueId = $request->request->get('venue_id');
@@ -69,12 +86,23 @@ class IndexController extends Controller
             $venue = $this->venueManager->createVenue($rawVenue['id'], $rawVenue['name'], $rawVenue['path'], $meetup);
         }
 
-        $availableVenues = $this->venueProvider->findAvailableVenues();
-        $associatedVenues = $this->venueProvider->getAssociatedVenues();
+        return $this->forward('App\Controller\IndexController::index');
+    }
 
-        return $this->render('index/index.html.twig', [
-            'availableVenues'  => $availableVenues,
-            'associatedVenues' => $associatedVenues,
-        ]);
+    /**
+     * @Route("/crawl", name="crawl")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function crawl(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $venueId = $request->request->get('venue_id');
+            $venue = $this->venueProvider->getVenue($venueId);
+            $this->venueManager->crawlVenue($venue);
+        }
+
+        return $this->forward('App\Controller\IndexController::index');
     }
 }

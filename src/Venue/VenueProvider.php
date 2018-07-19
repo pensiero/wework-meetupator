@@ -27,6 +27,18 @@ class VenueProvider
     }
 
     /**
+     * Get a Venue
+     *
+     * @param $id
+     *
+     * @return null|object
+     */
+    public function getVenue($id)
+    {
+        return $this->em->getRepository('App:Venue')->find($id);
+    }
+
+    /**
      * Giving an id, it will find a WeWork Building through the WeWork API
      *
      * @param string $id
@@ -55,6 +67,18 @@ class VenueProvider
         $client = new \GuzzleHttp\Client();
         try {
             $response = $client->request('GET', self::API_ALL_BUILDINGS);
+        } catch (GuzzleException $e) {
+            return [];
+        }
+
+        return json_decode($response->getBody()->getContents())->buildings;
+    }
+
+    public function findAvailableEvents($venueId): array
+    {
+        $client = new \GuzzleHttp\Client();
+        try {
+            $response = $client->request('GET', sprintf(self::API_BUILDING, $id));
         } catch (GuzzleException $e) {
             return [];
         }

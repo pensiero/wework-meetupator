@@ -1,42 +1,64 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    <h1>WeWork Meetupator</h1>
+    <div class="container">
 
-    {% if availableVenues is not empty %}
-        <section>
-            <h2>Buildings</h2>
-            <form method="post" action="{{ url('home') }}">
-                <div class="form-group">
-                    <label for="venueInput">Building</label>
-                    <select class="form-control" id="venueInput" name="venue_id">
-                        {% for venue in availableVenues %}
-                            <option value="{{ venue.id }}">{{ venue.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="meetupInput">Meetup URL</label>
-                    <input type="text" class="form-control" id="meetupInput" name="meetup_url" placeholder="https://www.meetup.com/..." required />
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Associate</button>
-                </div>
-            </form>
-        </section>
-    {% endif %}
+        <h1>WeWork Meetupator</h1>
+
+        {% if availableVenues is not empty %}
+            <section>
+                <h2>Buildings</h2>
+                <form method="post" action="{{ url('connect') }}">
+                    <div class="form-group">
+                        <label for="venueInput">Building</label>
+                        <select class="form-control" id="venueInput" name="venue_id">
+                            {% for venue in availableVenues %}
+                                <option value="{{ venue.id }}">{{ venue.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meetupInput">Meetup URL</label>
+                        <input type="text" class="form-control" id="meetupInput" name="meetup_url" placeholder="https://www.meetup.com/..." required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Associate</button>
+                    </div>
+                </form>
+            </section>
+        {% endif %}
 
 
-    {% if associatedVenues is not empty %}
-        <section>
-            <h2>Buildings linked to Meetup</h2>
-            <ul>
-                {% for venue in associatedVenues %}
-                    <li>
-                        <a href="{{ venue.echoUrl() }}" target="_blank">{{ venue }}</a> --> <a href="{{ venue.meetup.echoUrl() }}" target="_blank">{{ venue.meetup }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
-    {% endif %}
+        {% if associatedVenues is not empty %}
+
+            <hr />
+
+            <section>
+                <h3>Buildings linked to Meetup</h3>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>WeWork Building</th>
+                        <th>Meetup</th>
+                        <th></th>
+                    </tr>
+                    {% for venue in associatedVenues %}
+                        <tr>
+                            <td>
+                                <a href="{{ venue.echoUrl() }}" target="_blank">{{ venue }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ venue.meetup.echoUrl() }}" target="_blank">{{ venue.meetup }}</a>
+                            </td>
+                            <td>
+                                <form method="post" action="{{ url('crawl') }}">
+                                    <input type="hidden" name="venue_id" value="{{ venue.id }}" />
+                                    <button type="submit" class="btn btn-success">Crawl Events</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </section>
+        {% endif %}
+    </div>
 {% endblock %}

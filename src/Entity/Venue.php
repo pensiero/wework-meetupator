@@ -42,6 +42,16 @@ class Venue
      */
     private $url;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastEventCrawledAt;
+
+    public function __construct()
+    {
+        $this->lastEventCrawledAt = new \DateTime();
+    }
+
     public function __toString()
     {
         return $this->name;
@@ -101,6 +111,18 @@ class Venue
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getLastEventCrawledAt(): ?\DateTimeInterface
+    {
+        return $this->lastEventCrawledAt;
+    }
+
+    public function setLastEventCrawledAt(\DateTimeInterface $lastEventCrawledAt): self
+    {
+        $this->lastEventCrawledAt = $lastEventCrawledAt;
 
         return $this;
     }
