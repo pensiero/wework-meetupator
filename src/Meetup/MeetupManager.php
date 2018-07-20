@@ -48,32 +48,32 @@ class MeetupManager
      * Create a new Meetup Event
      *
      * @param Meetup $meetup
-     * @param array  $data
+     * @param array  $events
      *
      * @return bool
+     * @throws GuzzleException
      */
-    public function addMeetupEvent(Meetup $meetup, $data): bool
+    public function addMeetupEvent(Meetup $meetup, $events): bool
     {
         $client = new \GuzzleHttp\Client();
-        //try {
-            $response = $client->request(
+
+        foreach ($events as $event) {
+            $client->request(
                 'POST',
                 sprintf(self::API_EVENT, $meetup->getUrl()),
                 [
                     'query' => ['key' => getenv('API_KEY')],
                     'form_params' => [
-                        'name'        => $data['name'],
-                        'time'        => $data['time'] * 1000,
-                        'duration'    => $data['duration'],
-                        'description' => $data['description'],
-                        'lat'         => $data['latitude'],
-                        'long'        => $data['longitude'],
+                        'name'        => $event['name'],
+                        'time'        => $event['time'] * 1000,
+                        'duration'    => $event['duration'],
+                        'description' => $event['description'],
+                        'lat'         => $event['latitude'],
+                        'lon'         => $event['longitude'],
                     ],
                 ]
             );
-        //} catch (GuzzleException $e) {
-        //    return false;
-        //}
+        }
 
         return true;
     }
